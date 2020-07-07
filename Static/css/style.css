@@ -11,10 +11,11 @@
 }
 
 img {
-    border: 2px solid black;
+    /* border: 2px solid black; */
     border-radius: 20px;
     opacity: 0.75;
     transition: 0.25s ease-in-out;
+    padding-top: ;
 }
 
 img:hover {
@@ -39,4 +40,10 @@ button:hover {
 
 ul li {
     color: black;
+}
+
+ul {
+    font-weight: normal;
+    color: black;
+    font-size: x-large;
 }

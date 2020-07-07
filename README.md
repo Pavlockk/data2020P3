@@ -25,4 +25,5 @@ The dashboard idea really appealed to the team as we can share multiple types of
 
 
 4) Visualization Sketch:
+
 ![image](https://user-images.githubusercontent.com/61293043/86682764-e424b300-bfce-11ea-91ba-85ffe870ded2.png)

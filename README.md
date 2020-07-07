@@ -4,6 +4,4 @@ In this project, our team is creating a dashboard page using D3.js to create a s
 
 The link to the GitHub is as follows: https://github.com/Pavlockk/data2020Project3
 
-￼![Alt text](/../<master>/Resources/APIdata.jpg?raw=true "Optional Title")
-
-https://raw.github.com/{Pavlockk}/{data2020Project3}/{master}/{Resources/API.data.jpg}
+![image](https://user-images.githubusercontent.com/61293043/86680293-6a8bc580-bfcc-11ea-9945-44f1e9112ce6.png)

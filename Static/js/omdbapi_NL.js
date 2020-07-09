@@ -51,7 +51,12 @@ function buildMovie(movie) {
 
     var url = `http://www.omdbapi.com/?t=${movie}&apikey=${apiKey}`;
 
+
+
     d3.json(url).then(function(data) {
+
+        //remove information from previous search
+        d3.selectAll('ul').remove();
 
         // Grab values from the response json object to build the plots
         var title = data.Title;
@@ -61,6 +66,7 @@ function buildMovie(movie) {
         var poster = data.Poster;
         var director = data.Director;
         var plot = data.Plot;
+
 
         // var rating_1 = +data.Ratings[0].Value.split("/")[0];
         // var rating_2 = (data.Ratings[1].Value.split("%")[0] / 10);
@@ -95,36 +101,36 @@ function buildMovie(movie) {
         //add title
         d3.select("ul")
             .data(title)
-            .append('ul')
+            .append('li')
             .text(`Title: ${title}`)
 
         //add year
         d3.select('ul')
-            .append('ul')
+            .append('li')
             .data(year)
             .text(`Release Year: ${year}`)
 
         //add rated
         d3.select('ul')
-            .append('ul')
+            .append('li')
             .data(rated)
             .text(`Parental Rating: ${rated}`)
 
         //add released
         d3.select('ul')
-            .append('ul')
+            .append('li')
             .data(released)
             .text(`Release Date: ${released}`)
 
         //add director
         d3.select('ul')
-            .append('ul')
+            .append('li')
             .data(director)
             .text(`Director: ${director}`)
 
         //add plot
         d3.select('ul')
-            .append('ul')
+            .append('li')
             .data(plot)
             .text(`Plot: ${plot}`)
 
@@ -149,4 +155,5 @@ function buildMovie(movie) {
 //     });
 
 // Add event listener for submit button
-d3.select("#submit").on("click", handleSubmit);
+d3.select("#submit").on("click", handleSubmit, buildMovie);
+//d3.selectAll('ul').remove();

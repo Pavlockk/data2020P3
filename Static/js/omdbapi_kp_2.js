@@ -40,6 +40,11 @@ var chartMargin = {
   left: 30
 };
 
+var posterMargin = {
+    left: 50,
+    top: 20
+}
+
 // Define dimensions of the chart area
 var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
@@ -53,6 +58,13 @@ var svg = d3.select("body")
 // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
+
+var posterSvg = d3.select("body")
+.append("svg")
+.attr("height", 600)
+.attr("width", 500);
+var posterGroup = posterSvg.append("g")
+.attr("transform", `translate(${posterMargin.left}, ${posterMargin.top})`);
 
 
 // Submit Button handler
@@ -90,13 +102,18 @@ function buildMovie(movie) {
         var Rotten_rating = (data.Ratings[1].Value.split("%")[0]/10);
         var Metacritic_rating = (data.Ratings[2].Value.split("/")[0]/10);
 
-        var Ratings_1 = [IMDB_rating, Rotten_rating, Metacritic_rating];
+        var Ratings_1 = [
+            {"name": "IMDB","rating" : IMDB_rating},
+            {"name": "Rotten Tomatoes", "rating": Rotten_rating}, 
+            {"name": "Metacritic", "rating" : Metacritic_rating}];
 
         console.log(data);
 
         console.log(IMDB_rating, Rotten_rating, Metacritic_rating);
 
-        console.log(title, year, rated, released, poster, director)
+        console.log(Ratings_1);
+
+        console.log(title, year, rated, released, poster, director);
 
         var allInfo = [title, year, rated, released, poster, director];
 
@@ -112,16 +129,20 @@ function buildMovie(movie) {
             .text(function(d) {
                 return (d);
             });
-        d3.select("#poster")
-        .attr('src', poster)
-        .attr('height' ,437)
-        .attr('width' ,300);
+
+        posterGroup
+        // .append("g")
+        .append("svg:image")
+        .attr("class", "poster")
+        .attr('xlink:href', poster)
+        .attr('height', 500)
+        .attr('width', 375);
 
 
 
     // Configure a band scale for the horizontal axis with a padding of 0.1 (10%)
     var xBandScale = d3.scaleBand()
-        .domain([title])
+        .domain(Ratings_1.map(d => d.name))
         .range([0, chartWidth])
         .padding(0.1);
 
@@ -144,17 +165,21 @@ function buildMovie(movie) {
         .attr("transform", `translate(0, ${chartHeight})`)
         .call(bottomAxis);
 
+    // console.log(yLinearScale(Ratings_1[0].rating));
+    // console.log(chartHeight);
+    // console.log((chartHeight - yLinearScale(Ratings_1[0].rating)));
     // Create one SVG rectangle per piece of tvData
     // Use the linear and band scales to position each rectangle within the chart
-    chartGroup.selectAll("circle")
+    chartGroup.selectAll(".rating")
         .data(Ratings_1)
         .enter()
         .append("circle")
-        .attr("class", "scatter")
-        .attr("x", xBandScale())
-        .attr("y", yLinearScale())
-        .attr("width", xBandScale.bandwidth())
-        .attr("height", chartHeight - yLinearScale());
+        .attr("class", "rating")
+        .attr("cx", d => xBandScale(d.name))
+        .attr("cy", d => yLinearScale(d.rating))
+        .attr("r", 5)
+        // .attr("width", xBandScale.bandwidth())
+        // .attr("height", d => +(chartHeight - yLinearScale(d.rating)));
 
 
 

@@ -30,8 +30,11 @@
 
 // }
 
-var svgWidth = 960;
-var svgHeight = 660;
+var svgWidth = 300;
+var svgHeight = 300;
+
+var posterWidth = 500
+var posterHeight = 600
 
 // Define the chart's margins as an object
 var chartMargin = {
@@ -50,6 +53,16 @@ var posterMargin = {
 var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
 
+
+var posterSvg = d3.select("body")
+.append("svg")
+.attr("height", posterHeight)
+.attr("width", posterWidth);
+var posterGroup = posterSvg.append("g")
+.attr("transform", `translate(${posterMargin.left}, ${posterMargin.top})`);
+
+
+
 // Select body, append SVG area to it, and set the dimensions
 var svg = d3.select("body")
   .append("svg")
@@ -60,12 +73,6 @@ var svg = d3.select("body")
 var chartGroup = svg.append("g")
   .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
 
-var posterSvg = d3.select("body")
-.append("svg")
-.attr("height", 600)
-.attr("width", 500);
-var posterGroup = posterSvg.append("g")
-.attr("transform", `translate(${posterMargin.left}, ${posterMargin.top})`);
 
 
 
@@ -139,10 +146,10 @@ function buildMovie(movie) {
         //     .merge(selection)
         //     .text(title);
 
-        d3.select("#poster")
-            .attr('src', poster)
-            .attr('height', 437)
-            .attr('width', 300);
+        // d3.select("#poster")
+        //     .attr('src', poster)
+        //     .attr('height', 437)
+        //     .attr('width', 300);
 
 
 
@@ -215,7 +222,9 @@ function buildMovie(movie) {
         chartGroup.append("g")
             .attr("transform", `translate(0, ${chartHeight})`)
             .call(bottomAxis);
-    
+        
+
+        var rating_color = ["#ff9234", "#ffcd3c", "#35d0da"];
         // console.log(yLinearScale(Ratings_1[0].rating));
         // console.log(chartHeight);
         // console.log((chartHeight - yLinearScale(Ratings_1[0].rating)));
@@ -224,13 +233,13 @@ function buildMovie(movie) {
         chartGroup.selectAll(".rating")
             .data(Ratings_1)
             .enter()
-            .append("circle")
-            .attr("class", "rating")
-            .attr("cx", d => xBandScale(d.name))
-            .attr("cy", d => yLinearScale(d.rating))
-            .attr("r", 5)
-            // .attr("width", xBandScale.bandwidth())
-            // .attr("height", d => +(chartHeight - yLinearScale(d.rating)));
+            .append("rect")
+            .attr("fill", (d,i) => rating_color[i])
+            .attr("x", d => xBandScale(d.name))
+            .attr("y", d => yLinearScale(d.rating))
+            // .attr("r", 5)
+            .attr("width", xBandScale.bandwidth())
+            .attr("height", d => +(chartHeight - yLinearScale(d.rating)));
     
     
     

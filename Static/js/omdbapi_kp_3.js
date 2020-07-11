@@ -113,7 +113,18 @@ function buildMovie(movie) {
         var poster = data.Poster;
         var director = data.Director;
         var plot = data.Plot;
+        var genre = data.Genre.split(", ");
+        var genreLength = genre.length;
 
+
+        var genrePlot = {"name": title +" Genre/s",
+        "children": [   
+        ]};
+
+        for (i = 0; i < genreLength; i++){
+            genrePlot.children.push({"name": genre[i], "value": genreLength - i})
+        };
+        console.log(genrePlot);
 
         // var rating_1 = +data.Ratings[0].Value.split("/")[0];
         // var rating_2 = (data.Ratings[1].Value.split("%")[0] / 10);

@@ -130,15 +130,29 @@ function buildMovie(movie) {
         // var rating_2 = (data.Ratings[1].Value.split("%")[0] / 10);
         // var rating_3 = (data.Ratings[2].Value.split("/")[0] / 10);
         var IMDB_rating = +data.Ratings[0].Value.split("/")[0];
-        var Rotten_rating = (data.Ratings[1].Value.split("%")[0]/10);
-        var Metacritic_rating = (data.Ratings[2].Value.split("/")[0]/10);
 
         var Ratings_1 = [
-            {"name": "IMDB","rating" : IMDB_rating},
-            {"name": "Rotten Tomatoes", "rating": Rotten_rating}, 
-            {"name": "Metacritic", "rating" : Metacritic_rating}];
+            {"name": "IMDB","rating" : IMDB_rating}];
+
+        if (data.Ratings[1]){
+        var Rotten_rating = (data.Ratings[1].Value.split("%")[0]/10);
+        Ratings_1.push({"name": "Rotten Tomatoes", "rating": Rotten_rating});
+    };
+
+        // if (typeof Rotten_rating != "undefined"){
+        //     Ratings_1.push({"name": "Rotten Tomatoes", "rating": Rotten_rating});
+        // }
+
+        if (data.Ratings[2]){
+        var Metacritic_rating = (data.Ratings[2].Value.split("/")[0]/10);
+        Ratings_1.push({"name": "Metacritic", "rating" : Metacritic_rating});
+    };
+
+    
+
 
         console.log(data);
+        console.log(Ratings_1);
 
         // console.log(rating_1, rating_2, rating_3);
 

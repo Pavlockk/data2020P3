@@ -20,58 +20,68 @@ function buildMovie(movie) {
         if (d.Title === movie) {
 
 
-                var netflix = Boolean(d.Netflix);
-                var hulu = Boolean(d.Hulu);
-                var primevideo = Boolean(d.PrimeVideo);
-                var disney = Boolean(d["Disney+"]);
+                var netflix = d.Netflix;
+                var hulu = d.Hulu;
+                var primevideo = d["Prime Video"];
+                var disney = d["Disney+"];
                    
             
-                if (netflix && hulu && primevideo && disney) {
-                    description = "This film is available on Netflix, Hulu, PrimeVideo and Disney+.";
+                if (netflix === "1" && hulu  === "1" && primevideo === "1") {
+                    description = "This film is available on Netflix, Hulu and Prime Video.";
                     console.log(description);
                 
-                
-                
-                } else if (netflix && hulu) {
-                    description = "This film is available on Netflix.";
+                } else if (hulu === "1" && primevideo === "1" && disney === "1") {
+                    description = "This film is available on Hulu, Prime video and Disney+";
                     console.log(description);
             
-                } else if (hnetflix && primevideo) {
-                    description = "This film is available on Hulu.";
+                } else if (netflix === "1" && hulu === "1" && disney === "1") {
+                    description = "This film is available on Netflix, Hulu and Disney+.";
                     console.log(description);
             
-                } else if (primevideo) {
-                    description = "This film is available on Prime Video.";
+                } else if (primevideo === "1" && netflix === "1" && disney === "1") {
+                    description = "This film is available on Netflix, Prime Video and Disney+.";
                     console.log(description);
-            
-                } else if (disney) {
-                    description = "This film is available on Disney+.";
-                    console.log(description);
-            
-                } else if (netflix) {
-                    description = "This film is available on Netflix and Hulu.";
-                    console.log(description);
-            
-                } else if (hulu) {
-                    description = "This film is available on Netflix and PrimeVideo.";
-                    console.log(description);
-            
-                } else if (netflix && disney) {
+
+                } else if (netflix === "1" && disney === "1") {
                     description = "This film is available on Netflix and Disney+.";
                     console.log(description);
             
-                } else if (hulu && primevideo) {
-                    description = "This film is available on Hulu and PrimeVideo.";
+                } else if (hulu === "1" && primevideo === "1") {
+                    description = "This film is available on Hulu and Prime Video.";
                     console.log(description);
             
-                } else if (hulu && disney) {
+                } else if (hulu === "1" && disney === "1") {
                     description = "This film is available on Hulu and Disney+.";
                     console.log(description);
                 
-                } else if (primevideo && disney) {
-                    description = "This film is available on PrimeVideo and Disney+.";
+                } else if (primevideo === "1" && disney === "1") {
+                    description = "This film is available on Prime Video and Disney+.";
+                    console.log(description);
+            
+                } else if (netflix === "1" && hulu === "1") {
+                    description = "This film is available on Netflix and Hulu.";
+                    console.log(description);
+            
+                } else if (netflix === "1" && primevideo === "1") {
+                    description = "This film is available on Netflix and Prime Video.";
+                    console.log(description);
+            
+                } else if (disney === "1") {
+                    description = "This film is available on Disney+.";
                     console.log(description);
                 
+                } else if (netflix === "1") {
+                    description = "This film is available on Netflix.";
+                    console.log(description);
+
+                } else if (primevideo === "1") {
+                    description = "This film is available on Prime Video.";
+                    console.log(description);
+
+                } else if (hulu === "1") {
+                    description = "This film is available on Hulu.";
+                    console.log(description);
+
                 } else {
                     description = "This film cannot be found.";
 

@@ -30,23 +30,23 @@
 
 // }
 
-var svgWidth = 300;
-var svgHeight = 300;
+var svgWidth = 200;
+var svgHeight = 200;
 
-var posterWidth = 500
-var posterHeight = 600
+var posterWidth = 375
+var posterHeight = 500
 
 // Define the chart's margins as an object
 var chartMargin = {
-  top: 30,
-  right: 30,
-  bottom: 30,
-  left: 30
+  top: 20,
+  right: 20,
+  bottom: 20,
+  left: 20
 };
 
 var posterMargin = {
-    left: 50,
-    top: 20
+    left: 2,
+    top: 2
 }
 
 // Define dimensions of the chart area
@@ -54,7 +54,7 @@ var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
 
 
-var posterSvg = d3.select("body")
+var posterSvg = d3.select("#chartPoster")
 .append("svg")
 .attr("height", posterHeight)
 .attr("width", posterWidth);
@@ -64,7 +64,7 @@ var posterGroup = posterSvg.append("g")
 
 
 // Select body, append SVG area to it, and set the dimensions
-var svg = d3.select("body")
+var svg = d3.select("#chartPoster")
   .append("svg")
   .attr("height", svgHeight)
   .attr("width", svgWidth);
@@ -104,6 +104,7 @@ function buildMovie(movie) {
 
         //remove information from previous search
         d3.selectAll('ul').remove();
+        d3.select('chartPoster').remove();
 
         // Grab values from the response json object to build the plots
         var title = data.Title;
@@ -161,7 +162,7 @@ function buildMovie(movie) {
         var allInfo = [title, year, rated, released, poster, director];
 
         //append ul
-        var ul = d3.select("body").append("ul");
+        var ul = d3.select("#movieInfo").append("ul");
         var ul = d3.select("ul");
 
         // var selection = ul.select("li")
@@ -181,8 +182,8 @@ function buildMovie(movie) {
         //add title
         d3.select("ul")
             .data(title)
-            .append('li')
-            .text(`Title: ${title}`)
+            .append('h2')
+            .text(`${title}`)
 
         //add year
         d3.select('ul')

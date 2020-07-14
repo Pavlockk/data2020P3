@@ -91,7 +91,11 @@ function handleSubmit() {
 
     // Build the plot with the new movie
     buildMovie(movie);
+<<<<<<< HEAD
     buildMovie2(movie);
+=======
+    streaming(movie);
+>>>>>>> 37573783019510423a5823d0c9c97e78303b0ad9
 }
 
 function buildMovie(movie) {
@@ -105,7 +109,10 @@ function buildMovie(movie) {
 
         //remove information from previous search
         d3.selectAll('ul').remove();
+<<<<<<< HEAD
         d3.selectAll('li').remove();
+=======
+>>>>>>> 37573783019510423a5823d0c9c97e78303b0ad9
         d3.selectAll('.poster').remove();
         d3.selectAll('.rating').remove();
 
@@ -272,19 +279,32 @@ function buildMovie(movie) {
             .enter()
             .append("rect")
             .attr("class", "rating")
+<<<<<<< HEAD
             .attr("fill", (d, i) => rating_color[i])
+=======
+            .attr("fill", (d,i) => rating_color[i])
+>>>>>>> 37573783019510423a5823d0c9c97e78303b0ad9
             .attr("x", d => xBandScale(d.name))
             .attr("y", d => yLinearScale(d.rating))
             // .attr("r", 5)
             .attr("width", xBandScale.bandwidth())
             .attr("height", d => +(chartHeight - yLinearScale(d.rating)));
 
+<<<<<<< HEAD
 
 
 
 
+=======
+    
+>>>>>>> 37573783019510423a5823d0c9c97e78303b0ad9
     });
-}
+
+};
+
+function streaming (movie){
+   
+};
 
 // buildMovie(title, poster)
 
@@ -396,5 +416,10 @@ function buildMovie2(movie) {
 };
 
 // Add event listener for submit button
+<<<<<<< HEAD
 d3.select("#submit").on("load", handleSubmit, buildMovie("Star Wars"), buildMovie2("Star Wars"));
 d3.select("#submit").on("click", handleSubmit, buildMovie, buildMovie2);
+=======
+d3.select("#submit").on("click", handleSubmit);
+//d3.selectAll('ul').remove();
+>>>>>>> 37573783019510423a5823d0c9c97e78303b0ad9

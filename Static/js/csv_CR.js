@@ -14,11 +14,20 @@ function buildMovie2(movie) {
 
     d3.csv("../Resources/MoviesOnStreamingPlatforms_updated.csv").then(function(data) {
 
+<<<<<<< HEAD
 
         data.map(function(d) {
 
             if (d.Title === movie) {
+=======
+ 
+    data.map(function(d) { 
+        movie_filtered = movie.toLowerCase();
 
+>>>>>>> 37573783019510423a5823d0c9c97e78303b0ad9
+
+        if (d.Title.toLowerCase() === movie_filtered) {
+                console.log(movie);
 
                 var netflix = d.Netflix;
                 var hulu = d.Hulu;
@@ -84,10 +93,30 @@ function buildMovie2(movie) {
 
                 } else {
                     description = "This film cannot be found.";
-
+                    
                 }
 
 
+<<<<<<< HEAD
+=======
+            
+        }
+        
+      
+            
+            
+        
+    
+         
+    });
+    if (description){
+    }
+    else{
+        console.log("This film cannot be found.");
+    }
+     
+})}; 
+>>>>>>> 37573783019510423a5823d0c9c97e78303b0ad9
 
             }
 

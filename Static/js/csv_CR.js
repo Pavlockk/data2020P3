@@ -16,9 +16,11 @@ function buildMovie(movie) {
 
  
     data.map(function(d) { 
+        movie_filtered = movie.toLowerCase();
 
-        if (d.Title === movie) {
 
+        if (d.Title.toLowerCase() === movie_filtered) {
+                console.log(movie);
 
                 var netflix = d.Netflix;
                 var hulu = d.Hulu;
@@ -84,7 +86,7 @@ function buildMovie(movie) {
 
                 } else {
                     description = "This film cannot be found.";
-
+                    
                 }
 
 
@@ -98,6 +100,11 @@ function buildMovie(movie) {
     
          
     });
+    if (description){
+    }
+    else{
+        console.log("This film cannot be found.");
+    }
      
 })}; 
 

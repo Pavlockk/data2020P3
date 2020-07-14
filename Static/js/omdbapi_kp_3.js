@@ -91,6 +91,7 @@ function handleSubmit() {
 
     // Build the plot with the new movie
     buildMovie(movie);
+    streaming(movie);
 }
 
 function buildMovie(movie) {
@@ -104,6 +105,8 @@ function buildMovie(movie) {
 
         //remove information from previous search
         d3.selectAll('ul').remove();
+        d3.selectAll('.poster').remove();
+        d3.selectAll('.rating').remove();
 
         // Grab values from the response json object to build the plots
         var title = data.Title;
@@ -259,19 +262,22 @@ function buildMovie(movie) {
             .data(Ratings_1)
             .enter()
             .append("rect")
+            .attr("class", "rating")
             .attr("fill", (d,i) => rating_color[i])
             .attr("x", d => xBandScale(d.name))
             .attr("y", d => yLinearScale(d.rating))
             // .attr("r", 5)
             .attr("width", xBandScale.bandwidth())
             .attr("height", d => +(chartHeight - yLinearScale(d.rating)));
-    
-    
-    
-    
+
     
     });
-}
+
+};
+
+function streaming (movie){
+   
+};
 
 // buildMovie(title, poster)
 
@@ -291,5 +297,5 @@ function buildMovie(movie) {
 //     });
 
 // Add event listener for submit button
-d3.select("#submit").on("click", handleSubmit, buildMovie);
+d3.select("#submit").on("click", handleSubmit);
 //d3.selectAll('ul').remove();

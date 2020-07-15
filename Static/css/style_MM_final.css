@@ -12,7 +12,7 @@
 
 img {
     /* border: 2px solid black; */
-    border-radius: 20px;
+    border-radius: 10px;
     opacity: 0.75;
     transition: 0.25s ease-in-out;
 }
@@ -75,4 +75,8 @@ li {
     list-style-type: none;
     margin: 0;
     padding: 0;
+}
+.poster{
+    position: relative;
+    margin: auto;
 }

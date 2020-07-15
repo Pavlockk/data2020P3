@@ -135,11 +135,11 @@ function buildMovie(movie) {
 
         console.log(genrePlot);
 
-        var myRadarChart = new Chart(ctx, {
-            type: 'radar',
-            data: genreData,
-            // options: options
-        });
+        // var myRadarChart = new Chart(ctx, {
+        //     type: 'radar',
+        //     data: genreData,
+        //     // options: options
+        // });
 
 
         // var rating_1 = +data.Ratings[0].Value.split("/")[0];
@@ -406,97 +406,97 @@ function buildMovie2(movie) {
     })
 };
 
-function yearOrganizer(year){
-    if (year >= 2010){
-        return ("2010's")
-    }
-    else if(year >= 2000){
-        return ("2000's")
-    }
-    else if(year >= 1990){
-        return("1990's")
-    }
-    else if(year >= 1980){
-        return("1980's")
-    }
-    else if(year >= 1970){
-        return("1970's")
-    }
-    else if(year >= 1960){
-        return("1960's")
-    }
-    else if(year >= 1950){
-        return("1950's")
-    }
-    else{
-        return("Pre 1950's")
-    }
-}
+// function yearOrganizer(year){
+//     if (year >= 2010){
+//         return ("2010's")
+//     }
+//     else if(year >= 2000){
+//         return ("2000's")
+//     }
+//     else if(year >= 1990){
+//         return("1990's")
+//     }
+//     else if(year >= 1980){
+//         return("1980's")
+//     }
+//     else if(year >= 1970){
+//         return("1970's")
+//     }
+//     else if(year >= 1960){
+//         return("1960's")
+//     }
+//     else if(year >= 1950){
+//         return("1950's")
+//     }
+//     else{
+//         return("Pre 1950's")
+//     }
+// }
 
 
-function buildMovie3(movie) {
+// function buildMovie3(movie) {
 
-    d3.csv("../Resources/MoviesOnStreamingPlatforms_updated.csv").then(function(data) {
+//     d3.csv("../Resources/MoviesOnStreamingPlatforms_updated.csv").then(function(data) {
 
         
 
-        data.map(function(d) {
+//         data.map(function(d) {
 
-                var netflix = d.Netflix;
-                var hulu = d.Hulu;
-                var primevideo = d["Prime Video"];
-                var disney = d["Disney+"];
-                var movieYear = + d.Year;
+//                 var netflix = d.Netflix;
+//                 var hulu = d.Hulu;
+//                 var primevideo = d["Prime Video"];
+//                 var disney = d["Disney+"];
+//                 var movieYear = + d.Year;
 
 
-                if (netflix === "1" && hulu === "1" && primevideo === "1") {
+//                 if (netflix === "1" && hulu === "1" && primevideo === "1") {
                   
-                } else if (hulu === "1" && primevideo === "1" && disney === "1") {
+//                 } else if (hulu === "1" && primevideo === "1" && disney === "1") {
                    
 
-                } else if (netflix === "1" && hulu === "1" && disney === "1") {
+//                 } else if (netflix === "1" && hulu === "1" && disney === "1") {
                     
 
-                } else if (primevideo === "1" && netflix === "1" && disney === "1") {
+//                 } else if (primevideo === "1" && netflix === "1" && disney === "1") {
                     
 
-                } else if (netflix === "1" && disney === "1") {
+//                 } else if (netflix === "1" && disney === "1") {
                    
 
-                } else if (hulu === "1" && primevideo === "1") {
+//                 } else if (hulu === "1" && primevideo === "1") {
                     
 
-                } else if (hulu === "1" && disney === "1") {
+//                 } else if (hulu === "1" && disney === "1") {
                     
 
-                } else if (primevideo === "1" && disney === "1") {
+//                 } else if (primevideo === "1" && disney === "1") {
                     
 
-                } else if (netflix === "1" && hulu === "1") {
+//                 } else if (netflix === "1" && hulu === "1") {
                     
 
-                } else if (netflix === "1" && primevideo === "1") {
+//                 } else if (netflix === "1" && primevideo === "1") {
                     
 
-                } else if (disney === "1") {
+//                 } else if (disney === "1") {
                     
 
-                } else if (netflix === "1") {
+//                 } else if (netflix === "1") {
                     
 
-                } else if (primevideo === "1") {
+//                 } else if (primevideo === "1") {
                    
 
-                } else if (hulu === "1") {
+//                 } else if (hulu === "1") {
                     
 
-                }
+//                 }
 
 
-        });
+//         });
 
-    })
-};
+//     })
+// };
 
 // Add event listener for submit button
 d3.select("#submit").on("load", handleSubmit, buildMovie("Inception"), buildMovie2("Inception"));

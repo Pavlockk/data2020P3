@@ -1,5 +1,5 @@
-var svgWidth = 200;
-var svgHeight = 200;
+var svgWidth = 350;
+var svgHeight = 350;
 
 var posterWidth = 375
 var posterHeight = 500
@@ -32,7 +32,7 @@ var posterGroup = posterSvg.append("g")
 
 
 // Select body, append SVG area to it, and set the dimensions
-var svg = d3.select("#chartPoster")
+var svg = d3.select("#ratingChart")
   .append("svg")
   .attr("height", svgHeight)
   .attr("width", svgWidth);
@@ -94,16 +94,9 @@ function buildMovie(movie) {
         var genreData = [];
         var genreRange = [];
 
-    
-
-        var genrePlot = {
-            "name": title + " Genre/s",
-            "children": []
-        };
-
-        for (i = 0; i < genreLength; i++) {
-            genrePlot.children.push({ "name": genre[i], "value": genreLength - i })
-        };
+        var genres = ["Comedy", "Sci-Fi", "Thriller", "Horror", "Romance", "Action", "Drama", "Mystery", "Crime", "Animation", "Adventure", "Fantasy", "Comedy-Romance", "Action-Comedy", "Superhero"];
+        var genreHolder = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        
 
         // var rating_1 = +data.Ratings[0].Value.split("/")[0];
         // var rating_2 = (data.Ratings[1].Value.split("%")[0] / 10);
@@ -130,10 +123,10 @@ function buildMovie(movie) {
 
         //Data for radar chart below
         for (i = 0; i < genreLength; i++) {
-            genreRange.push(genreLength - i )
+            genreRange.push(genreLength - i)
             
         };
-        genreRange[(genreLength - 1)] = 0.5;
+        genreRange[(genreLength - 1)] = 0.99;
 
         var genreChartData = {
             "labels": genre,

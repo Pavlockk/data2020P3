@@ -1,35 +1,3 @@
-// //put in apikey
-// var apiKey = "f2c0a94c"
-
-// //place movie database in url
-// var url = "http://www.omdbapi.com/?t="
-// var apiKey = "&apikey=" + apiKey
-
-
-// //create a variable that will take user input
-// //and search OMDB for it.
-// //possibly need encodeURI?
-// var userInput = ['the matrix']
-
-// //add them both together
-// var url = url + userInput + apiKey
-
-// function moviePoster() {
-//     d3.json(url).then(function(data) {
-//         console.log(data);
-
-//         var image = data.Poster;
-
-//         if(image !== "N/A") {
-
-//         }
-
-
-
-//     });
-
-// }
-
 var svgWidth = 200;
 var svgHeight = 200;
 
@@ -123,7 +91,10 @@ function buildMovie(movie) {
         var plot = data.Plot;
         var genre = data.Genre.split(", ");
         var genreLength = genre.length;
+        var genreData = [];
+        var genreRange = [];
 
+    
 
         var genrePlot = {
             "name": title + " Genre/s",
@@ -133,7 +104,6 @@ function buildMovie(movie) {
         for (i = 0; i < genreLength; i++) {
             genrePlot.children.push({ "name": genre[i], "value": genreLength - i })
         };
-        console.log(genrePlot);
 
         // var rating_1 = +data.Ratings[0].Value.split("/")[0];
         // var rating_2 = (data.Ratings[1].Value.split("%")[0] / 10);
@@ -158,7 +128,17 @@ function buildMovie(movie) {
             Ratings_1.push({ "name": "Metacritic", "rating": Metacritic_rating });
         };
 
+        //Data for radar chart below
+        for (i = 0; i < genreLength; i++) {
+            genreRange.push(genreLength - i )
+            
+        };
+        genreRange[(genreLength - 1)] = 0.5;
 
+        var genreChartData = {
+            "labels": genre,
+            "datasets": [{"data": genreData}]
+        }
 
 
         console.log(data);
@@ -229,6 +209,7 @@ function buildMovie(movie) {
             .append('li')
             .text(description)
 
+
         posterGroup
         // .append("g")
             .append("svg:image")
@@ -283,8 +264,24 @@ function buildMovie(movie) {
             .attr("width", xBandScale.bandwidth())
             .attr("height", d => +(chartHeight - yLinearScale(d.rating)));
 
-
-
+        //Create Genre Chart
+        var movieRadar = document.getElementById("movieRadar");
+        if (movieRadar) {
+          new Chart(movieRadar, {
+            type: 'radar',
+            data: {
+              labels: genreChartData["labels"],
+              datasets: [
+                {
+                  label: title,
+                  backgroundColor: "rgba(0,0,200,0.2)",
+                  borderWidth: 0,
+                  data: genreRange,
+                }
+              ]
+            },
+          });
+        }
 
 
     });
@@ -407,3 +404,74 @@ function buildMovie2(movie) {
 // Add event listener for submit button
 d3.select("#submit").on("load", handleSubmit, buildMovie("Inception"), buildMovie2("Inception"));
 d3.select("#submit").on("click", handleSubmit, buildMovie, buildMovie2);
+
+//function yearChart() {
+
+//    d3.csv("../Resources/MoviesOnStreamingPlatforms_updated.csv").then(function(data) {
+
+//        description = "undefined";
+
+//        var timeRange = [];
+//        var dataLength = 10;
+//        data.map(function(d) {
+//            for (i = 0; i < dataLength; i++) {
+//                timeRange.push(d.Year)
+//            };
+
+//            var minYear = Math.min(timeRange);
+//            var maxYear = Math.max(timeRange);
+
+//            console.log(minYear);
+//            console.log(maxYear);
+
+    
+            //var genreChartData = {
+              //  "labels": genre,
+                //"datasets": [{"data": genreData}]
+            //}
+//        });
+
+//    })
+//};
+
+// chart colors
+var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+
+/* large line chart */
+//var movieLine = document.getElementById("movieLine");
+//var chartData = {
+//  labels: ["S", "M", "T", "W", "T", "F", "S"],
+//  datasets: [{
+//    data: [589, 445, 483, 503, 689, 692, 634],
+//    backgroundColor: 'transparent',
+//    borderColor: colors[0],
+//    borderWidth: 4,
+//    pointBackgroundColor: colors[0]
+//  },
+//  {
+//    data: [639, 465, 493, 478, 589, 632, 674],
+//    backgroundColor: colors[3],
+//    borderColor: colors[1],
+//    borderWidth: 4,
+//    pointBackgroundColor: colors[1]
+//  }]
+//};
+
+//if (movieLine) {
+//  new Chart(movieLine, {
+//  type: 'line',
+//  data: chartData,
+//  options: {
+//    scales: {
+//      yAxes: [{
+//        ticks: {
+//          beginAtZero: false
+//        }
+//      }]
+//    },
+//    legend: {
+//      display: false
+//    }
+//  }
+//  });
+//}

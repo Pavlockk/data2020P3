@@ -17,11 +17,13 @@ img {
     transition: 0.25s ease-in-out;
 }
 
-img:hover {
-    opacity: 1;
+#chartPoster:hover {
+    opacity: .5;
 }
 
-.top-buffer { margin-top: 30px;}
+.top-buffer {
+    margin-top: 30px;
+}
 
 button {
     cursor: pointer;
@@ -42,14 +44,15 @@ button:hover {
 .btn-success {
     background-color: lightslategray;
     outline: none;
-    width: 180px;
+    width: 100px;
     height: 40px;
-    border-style:none;
+    border-style: none;
 }
 
 .btn-success:hover {
     background-color: rgb(8, 76, 145);
 }
+
 
 /* ul li {
     color: rgb(54, 59, 54);
@@ -76,7 +79,9 @@ li {
     margin: 0;
     padding: 0;
 }
-.poster{
+
+#chartPoster {
     position: relative;
     margin: auto;
+    background-image: url();
 }

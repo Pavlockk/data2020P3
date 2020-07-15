@@ -6,10 +6,10 @@ var posterHeight = 500
 
 // Define the chart's margins as an object
 var chartMargin = {
-  top: 20,
-  right: 20,
-  bottom: 20,
-  left: 20
+    top: 20,
+    right: 20,
+    bottom: 20,
+    left: 20
 };
 
 var posterMargin = {
@@ -23,9 +23,9 @@ var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
 
 
 var posterSvg = d3.select("#chartPoster")
-.append("svg")
-.attr("height", posterHeight)
-.attr("width", posterWidth);
+    .append("svg")
+    .attr("height", posterHeight)
+    .attr("width", posterWidth);
 var posterGroup = posterSvg.append("g")
     .attr("transform", `translate(${posterMargin.left}, ${posterMargin.top})`);
 
@@ -33,9 +33,9 @@ var posterGroup = posterSvg.append("g")
 
 // Select body, append SVG area to it, and set the dimensions
 var svg = d3.select("#ratingChart")
-  .append("svg")
-  .attr("height", svgHeight)
-  .attr("width", svgWidth);
+    .append("svg")
+    .attr("height", svgHeight)
+    .attr("width", svgWidth);
 
 // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
 var chartGroup = svg.append("g")
@@ -95,8 +95,8 @@ function buildMovie(movie) {
         var genreRange = [];
 
         var genres = ["Comedy", "Sci-Fi", "Thriller", "Horror", "Romance", "Action", "Drama", "Mystery", "Crime", "Animation", "Adventure", "Fantasy", "Comedy-Romance", "Action-Comedy", "Superhero"];
-        var genreHolder = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-        
+        var genreHolder = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
 
         // var rating_1 = +data.Ratings[0].Value.split("/")[0];
         // var rating_2 = (data.Ratings[1].Value.split("%")[0] / 10);
@@ -109,7 +109,7 @@ function buildMovie(movie) {
 
         if (data.Ratings[1]) {
             var Rotten_rating = (data.Ratings[1].Value.split("%")[0] / 10);
-            Ratings_1.push({ "name": "Rotten Tomatoes", "rating": Rotten_rating });
+            Ratings_1.push({ "name": "RT", "rating": Rotten_rating });
         };
 
         // if (typeof Rotten_rating != "undefined"){
@@ -124,13 +124,13 @@ function buildMovie(movie) {
         //Data for radar chart below
         for (i = 0; i < genreLength; i++) {
             genreRange.push(genreLength - i)
-            
+
         };
         genreRange[(genreLength - 1)] = 0.99;
 
         var genreChartData = {
             "labels": genre,
-            "datasets": [{"data": genreData}]
+            "datasets": [{ "data": genreData }]
         }
 
 
@@ -260,20 +260,18 @@ function buildMovie(movie) {
         //Create Genre Chart
         var movieRadar = document.getElementById("movieRadar");
         if (movieRadar) {
-          new Chart(movieRadar, {
-            type: 'radar',
-            data: {
-              labels: genreChartData["labels"],
-              datasets: [
-                {
-                  label: title,
-                  backgroundColor: "rgba(0,0,200,0.2)",
-                  borderWidth: 0,
-                  data: genreRange,
-                }
-              ]
-            },
-          });
+            new Chart(movieRadar, {
+                type: 'radar',
+                data: {
+                    labels: genreChartData["labels"],
+                    datasets: [{
+                        label: title,
+                        backgroundColor: "rgba(0,0,200,0.2)",
+                        borderWidth: 0,
+                        data: genreRange,
+                    }]
+                },
+            });
         }
 
 
@@ -281,8 +279,8 @@ function buildMovie(movie) {
 
 };
 
-function streaming (movie){
-   
+function streaming(movie) {
+
 };
 
 // buildMovie(title, poster)
@@ -417,18 +415,18 @@ d3.select("#submit").on("click", handleSubmit, buildMovie, buildMovie2);
 //            console.log(minYear);
 //            console.log(maxYear);
 
-    
-            //var genreChartData = {
-              //  "labels": genre,
-                //"datasets": [{"data": genreData}]
-            //}
+
+//var genreChartData = {
+//  "labels": genre,
+//"datasets": [{"data": genreData}]
+//}
 //        });
 
 //    })
 //};
 
 // chart colors
-var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
 
 /* large line chart */
 //var movieLine = document.getElementById("movieLine");

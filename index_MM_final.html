@@ -9,7 +9,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/d3Style.css"> -->
 </head>
 
- <body>
+<body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-lg">
         <a class="navbar-brand" href="#">Movie Data Analytics</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,10 +17,10 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" id="movieInput" type="search" placeholder="Enter A Movie" aria-label="Search">
-            <button class="btn btn-md btn-success my-2 my-sm-0" id="submit" type="submit">Search</button>
-        </form>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" id="movieInput" type="search" placeholder="Enter A Movie" aria-label="Search">
+                <button class="btn btn-md btn-success my-2 my-sm-0" id="submit" type="submit">Search</button>
+            </form>
         </div>
     </nav>
 
@@ -34,13 +34,13 @@
                         <div class="col">
                             <div class="card shadow" id="chartPoster">
                                 <div class="card-image-top"></div>
-                                <div class="card-body"></div>
+                                <!-- <div class="card-body"></div> -->
                             </div>
                         </div>
                         <div class="col">
                             <div class="movieText" id="movieInfo"></div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
             </div>
             <div class="col-md-5">
@@ -53,9 +53,10 @@
                                 
                                 </canvas>
                                 <br><br>
-                                <h4>Movie Genres and Subgenres Radar Chart</h4>
+                                <h4>Genres Radar Chart</h4>
                                 <br><br>
-                                <div id = "ratingChart"></div>
+                                <div id="ratingChart"></div>
+                                <h4>Movie Rating Chart</h4>
                             </div>
                         </div>
                     </div>
@@ -74,4 +75,5 @@
     <script src="Static/js/final_MM.js"></script>
 
 </body>
+
 </html>

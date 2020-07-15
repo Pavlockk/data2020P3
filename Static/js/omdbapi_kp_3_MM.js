@@ -38,17 +38,10 @@ var posterHeight = 500
 
 // Define the chart's margins as an object
 var chartMargin = {
-<<<<<<< HEAD
   top: 20,
   right: 20,
   bottom: 20,
   left: 20
-=======
-    top: 30,
-    right: 30,
-    bottom: 30,
-    left: 30
->>>>>>> 8ead1482647193231fb5f7156a8e693b868059a9
 };
 
 var posterMargin = {
@@ -61,34 +54,20 @@ var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
 
 
-<<<<<<< HEAD
 var posterSvg = d3.select("#chartPoster")
 .append("svg")
 .attr("height", posterHeight)
 .attr("width", posterWidth);
-=======
-var posterSvg = d3.select("body")
-    .append("svg")
-    .attr("height", posterHeight)
-    .attr("width", posterWidth);
->>>>>>> 8ead1482647193231fb5f7156a8e693b868059a9
 var posterGroup = posterSvg.append("g")
     .attr("transform", `translate(${posterMargin.left}, ${posterMargin.top})`);
 
 
 
 // Select body, append SVG area to it, and set the dimensions
-<<<<<<< HEAD
 var svg = d3.select("#chartPoster")
   .append("svg")
   .attr("height", svgHeight)
   .attr("width", svgWidth);
-=======
-var svg = d3.select("body")
-    .append("svg")
-    .attr("height", svgHeight)
-    .attr("width", svgWidth);
->>>>>>> 8ead1482647193231fb5f7156a8e693b868059a9
 
 // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
 var chartGroup = svg.append("g")
@@ -112,11 +91,7 @@ function handleSubmit() {
 
     // Build the plot with the new movie
     buildMovie(movie);
-<<<<<<< HEAD
     buildMovie2(movie);
-=======
-    streaming(movie);
->>>>>>> 37573783019510423a5823d0c9c97e78303b0ad9
 }
 
 function buildMovie(movie) {
@@ -130,16 +105,13 @@ function buildMovie(movie) {
 
         //remove information from previous search
         d3.selectAll('ul').remove();
-<<<<<<< HEAD
+
         d3.select('chartPoster').remove();
-=======
-<<<<<<< HEAD
+
         d3.selectAll('li').remove();
-=======
->>>>>>> 37573783019510423a5823d0c9c97e78303b0ad9
         d3.selectAll('.poster').remove();
         d3.selectAll('.rating').remove();
->>>>>>> 8ead1482647193231fb5f7156a8e693b868059a9
+
 
         // Grab values from the response json object to build the plots
         var title = data.Title;
@@ -304,25 +276,17 @@ function buildMovie(movie) {
             .enter()
             .append("rect")
             .attr("class", "rating")
-<<<<<<< HEAD
             .attr("fill", (d, i) => rating_color[i])
-=======
-            .attr("fill", (d,i) => rating_color[i])
->>>>>>> 37573783019510423a5823d0c9c97e78303b0ad9
             .attr("x", d => xBandScale(d.name))
             .attr("y", d => yLinearScale(d.rating))
             // .attr("r", 5)
             .attr("width", xBandScale.bandwidth())
             .attr("height", d => +(chartHeight - yLinearScale(d.rating)));
 
-<<<<<<< HEAD
 
 
 
 
-=======
-    
->>>>>>> 37573783019510423a5823d0c9c97e78303b0ad9
     });
 
 };
@@ -441,10 +405,5 @@ function buildMovie2(movie) {
 };
 
 // Add event listener for submit button
-<<<<<<< HEAD
-d3.select("#submit").on("load", handleSubmit, buildMovie("Star Wars"), buildMovie2("Star Wars"));
+d3.select("#submit").on("load", handleSubmit, buildMovie("Inception"), buildMovie2("Inception"));
 d3.select("#submit").on("click", handleSubmit, buildMovie, buildMovie2);
-=======
-d3.select("#submit").on("click", handleSubmit);
-//d3.selectAll('ul').remove();
->>>>>>> 37573783019510423a5823d0c9c97e78303b0ad9

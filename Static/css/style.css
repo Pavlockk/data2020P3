@@ -12,16 +12,14 @@
 
 img {
     /* border: 2px solid black; */
-    border-radius: 20px;
+    border-radius: 10px;
     opacity: 0.75;
     transition: 0.25s ease-in-out;
 }
 
-img:hover {
-    opacity: 1;
+.top-buffer {
+    margin-top: 30px;
 }
-
-.top-buffer { margin-top: 30px;}
 
 button {
     cursor: pointer;
@@ -39,22 +37,30 @@ button:hover {
     color: whitesmoke
 }
 
-/* ul li {
-    color: rgb(54, 59, 54);
-    font-size: x-large;
-    list-style: none;
-    font-family: 'Tangerine', serif;
-    ;
+.btn-success {
+    background-color: lightslategray;
+    outline: none;
+    width: 100px;
+    height: 40px;
+    border-style: none;
 }
 
-ul {
-    font-weight: normal;
-    color: rgb(25, 190, 19);
-    font-size: x-large;
-    list-style: none;
-    font-family: Arial, Helvetica, sans-serif;
-} */
+.btn-success:hover {
+    background-color: rgb(8, 76, 145);
+}
 
 div.movieText {
     text-align: left;
+}
+
+li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#chartPoster {
+    position: relative;
+    margin: auto;
+    background-image: url();
 }

@@ -1,52 +1,20 @@
-// //put in apikey
-// var apiKey = "f2c0a94c"
+var svgWidth = 350;
+var svgHeight = 350;
 
-// //place movie database in url
-// var url = "http://www.omdbapi.com/?t="
-// var apiKey = "&apikey=" + apiKey
-
-
-// //create a variable that will take user input
-// //and search OMDB for it.
-// //possibly need encodeURI?
-// var userInput = ['the matrix']
-
-// //add them both together
-// var url = url + userInput + apiKey
-
-// function moviePoster() {
-//     d3.json(url).then(function(data) {
-//         console.log(data);
-
-//         var image = data.Poster;
-
-//         if(image !== "N/A") {
-
-//         }
-
-
-
-//     });
-
-// }
-
-var svgWidth = 300;
-var svgHeight = 300;
-
-var posterWidth = 500
-var posterHeight = 600
+var posterWidth = 375
+var posterHeight = 500
 
 // Define the chart's margins as an object
 var chartMargin = {
-    top: 30,
-    right: 30,
-    bottom: 30,
-    left: 30
+    top: 20,
+    right: 20,
+    bottom: 20,
+    left: 20
 };
 
 var posterMargin = {
-    left: 50,
-    top: 20
+    left: 2,
+    top: 2
 }
 
 // Define dimensions of the chart area
@@ -54,7 +22,7 @@ var chartWidth = svgWidth - chartMargin.left - chartMargin.right;
 var chartHeight = svgHeight - chartMargin.top - chartMargin.bottom;
 
 
-var posterSvg = d3.select("body")
+var posterSvg = d3.select("#chartPoster")
     .append("svg")
     .attr("height", posterHeight)
     .attr("width", posterWidth);
@@ -64,7 +32,7 @@ var posterGroup = posterSvg.append("g")
 
 
 // Select body, append SVG area to it, and set the dimensions
-var svg = d3.select("body")
+var svg = d3.select("#ratingChart")
     .append("svg")
     .attr("height", svgHeight)
     .attr("width", svgWidth);
@@ -72,9 +40,6 @@ var svg = d3.select("body")
 // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
 var chartGroup = svg.append("g")
     .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
-
-
-
 
 
 // Submit Button handler
@@ -105,9 +70,13 @@ function buildMovie(movie) {
 
         //remove information from previous search
         d3.selectAll('ul').remove();
+
+        d3.select('chartPoster').remove();
+
         d3.selectAll('li').remove();
         d3.selectAll('.poster').remove();
         d3.selectAll('.rating').remove();
+
 
         // Grab values from the response json object to build the plots
         var title = data.Title;
@@ -120,31 +89,12 @@ function buildMovie(movie) {
         var genre = data.Genre.split(", ");
         var genreLength = genre.length;
         var genreData = [];
+        var genreRange = [];
 
-        
-
-        for (i = 0; i < genreLength; i++) {
-            genreData.push(genreLength - i )
-        };
+        var genres = ["Comedy", "Sci-Fi", "Thriller", "Horror", "Romance", "Action", "Drama", "Mystery", "Crime", "Animation", "Adventure", "Fantasy", "Comedy-Romance", "Action-Comedy", "Superhero"];
+        var genreHolder = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 
-        var genrePlot = {
-            "labels": genre,
-            "datasets": [{"data": genreData}]
-        }
-
-        console.log(genrePlot);
-
-        var myRadarChart = new Chart(ctx, {
-            type: 'radar',
-            data: genreData,
-            // options: options
-        });
-
-
-        // var rating_1 = +data.Ratings[0].Value.split("/")[0];
-        // var rating_2 = (data.Ratings[1].Value.split("%")[0] / 10);
-        // var rating_3 = (data.Ratings[2].Value.split("/")[0] / 10);
         var IMDB_rating = +data.Ratings[0].Value.split("/")[0];
 
         var Ratings_1 = [
@@ -153,19 +103,26 @@ function buildMovie(movie) {
 
         if (data.Ratings[1]) {
             var Rotten_rating = (data.Ratings[1].Value.split("%")[0] / 10);
-            Ratings_1.push({ "name": "Rotten Tomatoes", "rating": Rotten_rating });
+            Ratings_1.push({ "name": "RT", "rating": Rotten_rating });
         };
 
-        // if (typeof Rotten_rating != "undefined"){
-        //     Ratings_1.push({"name": "Rotten Tomatoes", "rating": Rotten_rating});
-        // }
 
         if (data.Ratings[2]) {
             var Metacritic_rating = (data.Ratings[2].Value.split("/")[0] / 10);
             Ratings_1.push({ "name": "Metacritic", "rating": Metacritic_rating });
         };
 
+        //Data for radar chart below
+        for (i = 0; i < genreLength; i++) {
+            genreRange.push(genreLength - i)
 
+        };
+        genreRange[(genreLength - 1)] = 0.99;
+
+        var genreChartData = {
+            "labels": genre,
+            "datasets": [{ "data": genreData }]
+        }
 
 
         console.log(data);
@@ -178,28 +135,15 @@ function buildMovie(movie) {
         var allInfo = [title, year, rated, released, poster, director];
 
         //append ul
-        var ul = d3.select("body").append("ul");
+        var ul = d3.select("#movieInfo").append("ul");
         var ul = d3.select("ul");
-
-        // var selection = ul.select("li")
-        //     .data(title);
-        // selection.enter()
-        //     .append("li")
-        //     .merge(selection)
-        //     .text(title);
-
-        // d3.select("#poster")
-        //     .attr('src', poster)
-        //     .attr('height', 437)
-        //     .attr('width', 300);
-
 
 
         //add title
         d3.select("ul")
             .data(title)
-            .append('li')
-            .text(`Title: ${title}`)
+            .append('h2')
+            .text(`${title}`)
 
         //add year
         d3.select('ul')
@@ -235,6 +179,7 @@ function buildMovie(movie) {
         d3.select('ul')
             .append('li')
             .text(description)
+
 
         posterGroup
         // .append("g")
@@ -273,9 +218,7 @@ function buildMovie(movie) {
 
 
         var rating_color = ["#ff9234", "#ffcd3c", "#35d0da"];
-        // console.log(yLinearScale(Ratings_1[0].rating));
-        // console.log(chartHeight);
-        // console.log((chartHeight - yLinearScale(Ratings_1[0].rating)));
+
         // Create one SVG rectangle per piece of tvData
         // Use the linear and band scales to position each rectangle within the chart
         chartGroup.selectAll(".rating")
@@ -290,29 +233,31 @@ function buildMovie(movie) {
             .attr("width", xBandScale.bandwidth())
             .attr("height", d => +(chartHeight - yLinearScale(d.rating)));
 
-
-
+        //Create Genre Chart
+        var movieRadar = document.getElementById("movieRadar");
+        if (movieRadar) {
+            new Chart(movieRadar, {
+                type: 'radar',
+                data: {
+                    labels: genreChartData["labels"],
+                    datasets: [{
+                        label: title,
+                        backgroundColor: "rgba(0,0,200,0.2)",
+                        borderWidth: 0,
+                        data: genreRange,
+                    }]
+                },
+            });
+        }
 
 
     });
-}
 
-// buildMovie(title, poster)
+};
 
-// //append ul
-// var ul = d3.select("body").append("ul");
+function streaming(movie) {
 
-// var ul = d3.select("ul");
-
-
-// var selection = ul.selectAll("li")
-//     .data(title, poster);
-// selection.enter()
-//     .append("li")
-//     .merge(selection)
-//     .text(function(d) {
-//         return d;
-//     });
+};
 
 
 function buildMovie2(movie) {
@@ -406,98 +351,10 @@ function buildMovie2(movie) {
     })
 };
 
-function yearOrganizer(year){
-    if (year >= 2010){
-        return ("2010's")
-    }
-    else if(year >= 2000){
-        return ("2000's")
-    }
-    else if(year >= 1990){
-        return("1990's")
-    }
-    else if(year >= 1980){
-        return("1980's")
-    }
-    else if(year >= 1970){
-        return("1970's")
-    }
-    else if(year >= 1960){
-        return("1960's")
-    }
-    else if(year >= 1950){
-        return("1950's")
-    }
-    else{
-        return("Pre 1950's")
-    }
-}
-
-
-function buildMovie3(movie) {
-
-    d3.csv("../Resources/MoviesOnStreamingPlatforms_updated.csv").then(function(data) {
-
-        
-
-        data.map(function(d) {
-
-                var netflix = d.Netflix;
-                var hulu = d.Hulu;
-                var primevideo = d["Prime Video"];
-                var disney = d["Disney+"];
-                var movieYear = + d.Year;
-
-
-                if (netflix === "1" && hulu === "1" && primevideo === "1") {
-                  
-                } else if (hulu === "1" && primevideo === "1" && disney === "1") {
-                   
-
-                } else if (netflix === "1" && hulu === "1" && disney === "1") {
-                    
-
-                } else if (primevideo === "1" && netflix === "1" && disney === "1") {
-                    
-
-                } else if (netflix === "1" && disney === "1") {
-                   
-
-                } else if (hulu === "1" && primevideo === "1") {
-                    
-
-                } else if (hulu === "1" && disney === "1") {
-                    
-
-                } else if (primevideo === "1" && disney === "1") {
-                    
-
-                } else if (netflix === "1" && hulu === "1") {
-                    
-
-                } else if (netflix === "1" && primevideo === "1") {
-                    
-
-                } else if (disney === "1") {
-                    
-
-                } else if (netflix === "1") {
-                    
-
-                } else if (primevideo === "1") {
-                   
-
-                } else if (hulu === "1") {
-                    
-
-                }
-
-
-        });
-
-    })
-};
-
 // Add event listener for submit button
 d3.select("#submit").on("load", handleSubmit, buildMovie("Inception"), buildMovie2("Inception"));
 d3.select("#submit").on("click", handleSubmit, buildMovie, buildMovie2);
+
+
+// chart colors
+var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];

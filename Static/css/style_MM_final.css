@@ -17,10 +17,6 @@ img {
     transition: 0.25s ease-in-out;
 }
 
-#chartPoster:hover {
-    opacity: .5;
-}
-
 .top-buffer {
     margin-top: 30px;
 }

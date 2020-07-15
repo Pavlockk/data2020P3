@@ -64,13 +64,13 @@ var posterGroup = posterSvg.append("g")
 
 
 // Select body, append SVG area to it, and set the dimensions
-var svg = d3.select("body")
+var ratingSvg = d3.select("body")
     .append("svg")
     .attr("height", svgHeight)
     .attr("width", svgWidth);
 
 // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
-var chartGroup = svg.append("g")
+var chartGroup = ratingSvg.append("g")
     .attr("transform", `translate(${chartMargin.left}, ${chartMargin.top})`);
 
 
@@ -92,6 +92,8 @@ function handleSubmit() {
     // Build the plot with the new movie
     buildMovie(movie);
     buildMovie2(movie);
+    streaming(movie);
+
 }
 
 function buildMovie(movie) {
@@ -119,28 +121,17 @@ function buildMovie(movie) {
         var plot = data.Plot;
         var genre = data.Genre.split(", ");
         var genreLength = genre.length;
-        var genreData = [];
-
-        
-
-        for (i = 0; i < genreLength; i++) {
-            genreData.push(genreLength - i )
-        };
 
 
         var genrePlot = {
-            "labels": genre,
-            "datasets": [{"data": genreData}]
-        }
+            "name": title + " Genre/s",
+            "children": []
+        };
 
+        for (i = 0; i < genreLength; i++) {
+            genrePlot.children.push({ "name": genre[i], "value": genreLength - i })
+        };
         console.log(genrePlot);
-
-        var myRadarChart = new Chart(ctx, {
-            type: 'radar',
-            data: genreData,
-            // options: options
-        });
-
 
         // var rating_1 = +data.Ratings[0].Value.split("/")[0];
         // var rating_2 = (data.Ratings[1].Value.split("%")[0] / 10);
@@ -283,7 +274,11 @@ function buildMovie(movie) {
             .enter()
             .append("rect")
             .attr("class", "rating")
+
             .attr("fill", (d, i) => rating_color[i])
+
+            .attr("fill", (d,i) => rating_color[i])
+
             .attr("x", d => xBandScale(d.name))
             .attr("y", d => yLinearScale(d.rating))
             // .attr("r", 5)
@@ -295,7 +290,12 @@ function buildMovie(movie) {
 
 
     });
-}
+
+};
+
+function streaming (movie){
+   
+};
 
 // buildMovie(title, poster)
 
@@ -399,98 +399,6 @@ function buildMovie2(movie) {
                 description = "This film is not on Netflix, Prime Video, Disney+ or Hulu."
                 console.log("This film cannot be found.");
             }
-
-
-        });
-
-    })
-};
-
-function yearOrganizer(year){
-    if (year >= 2010){
-        return ("2010's")
-    }
-    else if(year >= 2000){
-        return ("2000's")
-    }
-    else if(year >= 1990){
-        return("1990's")
-    }
-    else if(year >= 1980){
-        return("1980's")
-    }
-    else if(year >= 1970){
-        return("1970's")
-    }
-    else if(year >= 1960){
-        return("1960's")
-    }
-    else if(year >= 1950){
-        return("1950's")
-    }
-    else{
-        return("Pre 1950's")
-    }
-}
-
-
-function buildMovie3(movie) {
-
-    d3.csv("../Resources/MoviesOnStreamingPlatforms_updated.csv").then(function(data) {
-
-        
-
-        data.map(function(d) {
-
-                var netflix = d.Netflix;
-                var hulu = d.Hulu;
-                var primevideo = d["Prime Video"];
-                var disney = d["Disney+"];
-                var movieYear = + d.Year;
-
-
-                if (netflix === "1" && hulu === "1" && primevideo === "1") {
-                  
-                } else if (hulu === "1" && primevideo === "1" && disney === "1") {
-                   
-
-                } else if (netflix === "1" && hulu === "1" && disney === "1") {
-                    
-
-                } else if (primevideo === "1" && netflix === "1" && disney === "1") {
-                    
-
-                } else if (netflix === "1" && disney === "1") {
-                   
-
-                } else if (hulu === "1" && primevideo === "1") {
-                    
-
-                } else if (hulu === "1" && disney === "1") {
-                    
-
-                } else if (primevideo === "1" && disney === "1") {
-                    
-
-                } else if (netflix === "1" && hulu === "1") {
-                    
-
-                } else if (netflix === "1" && primevideo === "1") {
-                    
-
-                } else if (disney === "1") {
-                    
-
-                } else if (netflix === "1") {
-                    
-
-                } else if (primevideo === "1") {
-                   
-
-                } else if (hulu === "1") {
-                    
-
-                }
 
 
         });
